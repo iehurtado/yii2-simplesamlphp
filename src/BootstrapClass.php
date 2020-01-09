@@ -21,12 +21,16 @@ class BootstrapClass implements BootstrapInterface
 {
     public function bootstrap($app)
     {
+        if ($app instanceof \yii\console\Application) {
+            return;
+        }
+        
         $app->on(Application::EVENT_BEFORE_REQUEST, function () {
             //creating a controller for the login route
             Yii::$app->controllerMap['_saml'] = '\lucidprogrammer\simplesamlphp\_SamlController';
             //a globally accessible instance of saml
-            Yii::$container->set('saml',new Saml());
-            Yii::$container->set('samlsettings',new SamlSettings());
+            Yii::$container->set('saml', new Saml());
+            Yii::$container->set('samlsettings', new SamlSettings());
             // TODO possibly check if the user has enabled /saml alias.
         });
     }
