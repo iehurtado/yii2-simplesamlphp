@@ -10,7 +10,7 @@
  */
 
 namespace lucidprogrammer\simplesamlphp;
-use lucidprogrammer\simplesamlphp\BaseObject;
+use yii\base\BaseObject;
 
 class SamlSettings extends BaseObject {
 var $idAttribute;

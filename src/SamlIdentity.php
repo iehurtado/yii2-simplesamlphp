@@ -14,7 +14,7 @@ namespace lucidprogrammer\simplesamlphp;
 
 
 use yii;
-use lucidprogrammer\simplesamlphp\BaseObject;
+use yii\base\BaseObject;
 use yii\web\IdentityInterface;
 use lucidprogrammer\simplesamlphp\SamlIdentity;
 
@@ -39,21 +39,18 @@ class SamlIdentity extends BaseObject implements IdentityInterface {
    * @return IdentityInterface|null the identity object that matches the given ID.
    */
     public static function findIdentity($id)
-
     {
-      $attributes = Yii::$container->get('saml')->getAttributes();
-      if(sizeof($attributes) > 0){
-        // just in case the user didn't set idAttribute, give something anyway, he can troubleshoot later instead of throwing errors here
-        $id = mt_rand();
-        $uniqueIdentifierFromIdp = Yii::$container->get('samlsettings')->idAttribute ? Yii::$container->get('samlsettings')->idAttribute : '';
-        if($uniqueIdentifierFromIdp){
-          $id = $attributes[$uniqueIdentifierFromIdp] && count($attributes[$uniqueIdentifierFromIdp])>0 ? $attributes[$uniqueIdentifierFromIdp][0] : $id;
+        $attributes = Yii::$container->get('saml')->getAttributes();
+        if(sizeof($attributes) > 0){
+            // just in case the user didn't set idAttribute, give something anyway, he can troubleshoot later instead of throwing errors here
+            $id = mt_rand();
+            $uniqueIdentifierFromIdp = Yii::$container->get('samlsettings')->idAttribute ? Yii::$container->get('samlsettings')->idAttribute : '';
+            if($uniqueIdentifierFromIdp){
+                $id = $attributes[$uniqueIdentifierFromIdp] && count($attributes[$uniqueIdentifierFromIdp])>0 ? $attributes[$uniqueIdentifierFromIdp][0] : $id;
+            }
+            return new SamlIdentity($id,$attributes);
         }
-        return new SamlIdentity($id,$attributes);
-      }
-      return null;
-
-
+        return null;
     }
 
   /**

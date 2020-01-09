@@ -10,7 +10,8 @@
  */
 
 namespace lucidprogrammer\simplesamlphp;
-use lucidprogrammer\simplesamlphp\BaseObject;
+
+use yii\base\BaseObject;
 
 class Saml extends BaseObject {
 
@@ -26,7 +27,7 @@ class Saml extends BaseObject {
 
 
     public function init() {
-        $this->auth = new \SimpleSAML_Auth_Simple($this->authSource);
+        $this->auth = new \SimpleSAML\Auth\Simple($this->authSource);
         parent::init();
     }
 
