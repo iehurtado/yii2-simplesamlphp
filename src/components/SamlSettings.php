@@ -9,17 +9,17 @@
  * @link       https://github.com/lucidprogrammer/yii2-simplesamlphp
  */
 
-namespace lucidprogrammer\simplesamlphp;
+namespace lucidprogrammer\simplesamlphp\components;
 use yii\base\BaseObject;
 
 class SamlSettings extends BaseObject {
 var $idAttribute;
 var $mappings;
 
-  public function __construct ( $idAttribute='', $mappings=[], $config = [] ){
+  public function __construct ($idAttribute = '', $mappings = [], $config = []){
           $this->idAttribute = $idAttribute;
           $this->mappings = $mappings;
-          parent::__construct ( $config = [] );
+          parent::__construct ($config);
     }
 
 
