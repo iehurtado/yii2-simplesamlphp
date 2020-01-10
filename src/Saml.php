@@ -9,7 +9,7 @@
  * @link       https://github.com/lucidprogrammer/yii2-simplesamlphp
  */
 
-namespace lucidprogrammer\simplesamlphp\components;
+namespace lucidprogrammer\simplesamlphp;
 
 use yii\base\BaseObject;
 
@@ -18,7 +18,7 @@ class Saml extends BaseObject {
     /**
      * Authentication source you will use.
      */
-    public $authSource = 'default-sp';
+    public $authSource='default-sp';
 
     /**
      * SimpleSAML_Auth_Simple's object.
