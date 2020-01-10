@@ -13,8 +13,9 @@
 
 namespace lucidprogrammer\simplesamlphp\controllers;
 
+use Yii;
 use yii\web\Controller;
-use lucidprogrammer\simplesamlphp\SamlIdentity;
+use lucidprogrammer\simplesamlphp\components\SamlIdentity;
 use lucidprogrammer\simplesamlphp\traits\ContainerAwareTrait;
 
 class DefaultController extends Controller {

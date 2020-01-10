@@ -15,7 +15,6 @@ namespace lucidprogrammer\simplesamlphp\components;
 
 use yii\base\BaseObject;
 use yii\web\IdentityInterface;
-use lucidprogrammer\simplesamlphp\SamlIdentity;
 use lucidprogrammer\simplesamlphp\traits\ContainerAwareTrait;
 
 class SamlIdentity extends BaseObject implements IdentityInterface {

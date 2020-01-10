@@ -12,12 +12,17 @@
 namespace lucidprogrammer\simplesamlphp\models;
 
 use yii\web\User;
+use yii\helpers\Url;
+
 use ArrayObject;
 use lucidprogrammer\simplesamlphp\traits\ContainerAwareTrait;
+use lucidprogrammer\simplesamlphp\traits\ModuleAwareTrait;
+
 
 class SamlUser extends User
 {
     use ContainerAwareTrait;
+    use ModuleAwareTrait;
     
     public $loginUrl = ['_saml/login'];
     public $identityClass = 'lucidprogrammer\simplesamlphp\SamlIdentity';
@@ -42,6 +47,12 @@ class SamlUser extends User
 
         parent::__construct();
     }
+    
+//    public function init () {
+//        if (!isset($this->loginUrl)) {
+//            $this->loginUrl = Url::toRoute("{$this->getModuleInstance()->id}/login");
+//        }
+//    }
 
     public function logout($destroySession = true)
     {

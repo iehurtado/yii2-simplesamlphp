@@ -15,9 +15,12 @@ namespace lucidprogrammer\simplesamlphp;
 use yii\base\BootstrapInterface;
 use lucidprogrammer\simplesamlphp\components\Saml;
 use lucidprogrammer\simplesamlphp\components\SamlSettings;
+use lucidprogrammer\simplesamlphp\traits\ContainerAwareTrait;
 
-class Bootstrap implements BootstrapInterface
+class BootstrapClass implements BootstrapInterface
 {
+    use ContainerAwareTrait;
+    
     public function bootstrap($app)
     {
         if (!$app instanceof \yii\console\Application) {
@@ -27,8 +30,8 @@ class Bootstrap implements BootstrapInterface
     
     protected function initContainer() {
         //a globally accessible instance of saml
-        Yii::$container->set('saml', Saml::class);
-        Yii::$container->set('samlsettings', SamlSettings::class);
+        $this->set('saml', Saml::class);
+        $this->set('samlsettings', SamlSettings::class);
     }
 
 }

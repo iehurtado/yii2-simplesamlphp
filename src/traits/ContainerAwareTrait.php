@@ -7,8 +7,13 @@
  */
 namespace lucidprogrammer\simplesamlphp\traits;
 
+use Yii;
+
 trait ContainerAwareTrait {
-    public function get($depName) {
-        return Yii::$container->get($depName);
+    public function get($class) {
+        return Yii::$container->get($class);
+    }
+    public function set($class, $definition = [], $params = []) {
+        Yii::$container->set($class, $definition, $params);
     }
 }
