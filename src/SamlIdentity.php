@@ -12,11 +12,9 @@
 
 namespace lucidprogrammer\simplesamlphp;
 
-
-use yii;
+use Yii;
 use yii\base\BaseObject;
 use yii\web\IdentityInterface;
-use lucidprogrammer\simplesamlphp\SamlIdentity;
 
 class SamlIdentity extends BaseObject implements IdentityInterface {
 
@@ -48,7 +46,7 @@ class SamlIdentity extends BaseObject implements IdentityInterface {
             if($uniqueIdentifierFromIdp){
                 $id = $attributes[$uniqueIdentifierFromIdp] && count($attributes[$uniqueIdentifierFromIdp])>0 ? $attributes[$uniqueIdentifierFromIdp][0] : $id;
             }
-            return new SamlIdentity($id,$attributes);
+            return new self($id,$attributes);
         }
         return null;
     }

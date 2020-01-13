@@ -18,40 +18,31 @@ use lucidprogrammer\simplesamlphp\SamlSettings;
 
 class SamlUser extends User
 {
+    
+    public $identityClass = 'lucidprogrammer\simplesamlphp\SamlIdentity';
+    public $loginUrl = ['_saml/login'];
+    public $enableAutoLogin = true;
+    
+    function __construct($attributes = []) 
+    {
+        $idAttribute = null;
+        $mappings = null;
+        if(array_key_exists('idAttribute', $attributes)){
+            $idAttribute = $attributes['idAttribute'];
+            $mappings = (new ArrayObject($attributes))->getArrayCopy();
+            unset($mappings['idAttribute']);
+            $mappings = array_values($mappings);
+        }
+        Yii::$container->get('samlsettings')->idAttribute = $idAttribute;
+        Yii::$container->get('samlsettings')->mappings = $mappings;
 
-  function __construct($attributes=[]) {
-    $idAttribute = null;
-    $mappings = null;
-    if(array_key_exists('idAttribute', $attributes)){
-      $idAttribute = $attributes['idAttribute'];
-      $mappings = (new ArrayObject($attributes))->getArrayCopy();
-      unset($mappings['idAttribute']);
-      $mappings = array_values($mappings);
+        parent::__construct();
     }
-    Yii::$container->get('samlsettings')->idAttribute = $idAttribute;
-    Yii::$container->get('samlsettings')->mappings = $mappings;
 
-    parent::__construct();
-  }
-  /**
-  * changing the loginUrl and identityClass
-  * so while configuring yii2, just point to the user class and all other auth rules should automatically work.
-  */
-  public function init()
-  {
-      $this->loginUrl = ['_saml/login'];
-      $this->identityClass = 'lucidprogrammer\simplesamlphp\SamlIdentity';
-      $this->enableAutoLogin = true;
-      parent::init();
-  }
-
-  public function logout($destroySession = true)
-  {
-
-    Yii::$container->get('saml')->logout('/');
-    parent::logout($destroySession);
-
-  }
-
+    public function logout($destroySession = true) 
+    {
+      Yii::$container->get('saml')->logout('/');
+      parent::logout($destroySession);
+    }
 
 }
